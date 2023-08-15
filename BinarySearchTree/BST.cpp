@@ -1,40 +1,39 @@
 #include <stdlib.h>
-template <class Object>
 
+template <class T>
 class TreeNode {
 	private:
-		Object* object;
-		TreeNode* left;
-		TreeNode* right;
-	
+		T* info;
+		TreeNode<T>* left;
+		TreeNode<T>* right;
 	public:
 		// Default constructor
 		TreeNode() {
-			this->object = NULL;
+			this->info = NULL;
 			this->left = this->right = NULL;
 		};
 		// Parameterized constructor
-		TreeNode(Object* object) {
-			this->object = object;
+		TreeNode(T* x) {
+			this->info = x;
 			this->left = this->right = NULL;
 		};
-		Object* getInfo() {
-			return this->object;
+		T* getInfo() const {
+			return this->info;
 		};
-		void setInfo(Object* object) {
-			this->object = object;
+		void setInfo(T* x) {
+			this->info = x;
 		};
-		TreeNode* getLeft() {
-			return left;
+		TreeNode<T>* getLeft() const {
+			return this->left;
 		};
-		void setLeft(TreeNode *left) {
-			this->left = left;
+		void setLeft(TreeNode<T>* x) {
+			this->left = x;
 		};
-		TreeNode* getRight() {
-			return right;
+		TreeNode<T>* getRight() const {
+			return this->right;
 		};
-		void setRight(TreeNode *right) {
-			this->right = right;
+		void setRight(TreeNode<T>* x) {
+			this->right = x;
 		};
 		int isLeaf() {
 			if(this->left == NULL && this->right == NULL) {
