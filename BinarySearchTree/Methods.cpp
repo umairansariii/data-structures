@@ -52,6 +52,44 @@ void insert(TreeNode<char>* root, char* info) {
 		p->setRight(node);
 	};
 };
+TreeNode<int>* findMin(TreeNode<int>* root) {
+	if(root == NULL) {
+		return NULL;
+	};
+	if(root->getLeft() == NULL) {
+		return root;
+	};
+	return findMin(root->getLeft());
+};
+TreeNode<int>* remove(TreeNode<int>* root, int info) {
+	TreeNode<int>* t;
+	int cmp = info - *(root->getInfo());
+	if(cmp < 0) {
+		t = remove(root->getLeft(), info);
+		root->setLeft(t);
+	} else if(cmp > 0) {
+		t = remove(root->getRight(), info);
+		root->setRight(t);
+	} else if(root->getLeft() != NULL && root->getRight() != NULL) {
+		TreeNode<int>* minNode;
+		minNode = findMin(root->getRight());
+		root->setInfo(minNode->getInfo());
+		t = remove(root->getRight(), *(minNode->getInfo()));
+		root->setRight(t);
+	} else {
+		TreeNode<int>* nodeToDelete = root;
+		if(root->getLeft() == NULL) {
+			root = root->getRight();
+		} else if(root->getRight() == NULL) {
+			root = root->getLeft();
+		} else {
+			root = NULL;
+		};
+		delete nodeToDelete;
+	};
+	return root;
+};
+
 void preorder(TreeNode<int>* treeNode) {
 	if(treeNode != NULL) {
 		cout << *(treeNode->getInfo()) << " ";
